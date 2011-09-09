@@ -50,4 +50,4 @@ if __name__ == "__main__":
     pixel_size = [int(sys.argv[2]),int(sys.argv[3])]
     art = pixel_art(img,pixel_size)
     art.show()
-    art.save('pixelised_'+os.path.basename(img.filename))
+    art.save('art/pixelised_'+os.path.basename(img.filename))
