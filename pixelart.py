@@ -2,16 +2,26 @@
 import sys
 import Image
 import ImageDraw
+from collections import defaultdict
 
-
-def get_color(region):
-    area_bx = 0
-    w,h = region.size
+def my_getcolors(reg):
+    w,h = reg.size
+    color_map = defaultdict(int)
     for i in range(0,w):
         for j in range(0,h):
-            pix = region.getpixel((i,j))
-            area_bx += sum(pix)/3
-    return area_bx/(region.size[0]*region.size[1])
+            pix = reg.getpixel((i,j))
+            if color_map[pix] == 0:
+                color_map[pix] = 1 
+            else: 
+                color_map[pix] += 1
+#For some reason i hate the following line of code
+    return {v:k for k, v in color_map.items()}
+
+def get_color(region):
+    'Return average color of a region'   
+    color_dist = my_getcolors(region)
+    max_color = color_dist[max(color_dist.keys())]
+    return max_color
 
 
 def pixelize(region):
