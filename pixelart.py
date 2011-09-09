@@ -3,6 +3,7 @@ import sys
 import Image
 import ImageDraw
 from collections import defaultdict
+import os
 
 def my_getcolors(reg):
     w,h = reg.size
@@ -49,4 +50,4 @@ if __name__ == "__main__":
     pixel_size = [int(sys.argv[2]),int(sys.argv[3])]
     art = pixel_art(img,pixel_size)
     art.show()
-    art.save(img.filename+'_pixel_art.jpg')
+    art.save('pixelised_'+os.path.basename(img.filename))
